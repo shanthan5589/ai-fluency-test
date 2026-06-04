@@ -16,7 +16,7 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "AI Fluency Test | Advantage Mapping",
+  title: "AI Fluency Test",
   description: "Measure your career's AI readiness and evolve your competitive advantage.",
 }
 
