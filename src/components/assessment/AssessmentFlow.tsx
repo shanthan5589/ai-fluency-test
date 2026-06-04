@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 import { LogOut, ShieldCheck } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { logout } from "@/actions/auth"
@@ -29,6 +29,8 @@ export function AssessmentFlow({ userName }: AssessmentFlowProps) {
   const [gradingResult, setGradingResult] = useState<GradingResult | null>(null)
   const [uploadError, setUploadError] = useState<string | null>(null)
   const [isGrading, setIsGrading] = useState(false)
+  // Ref so timer callbacks can check grading state without stale closure
+  const isGradingRef = useRef(false)
 
   async function handleFileUpload(file: File) {
     setUploadError(null)
@@ -66,8 +68,11 @@ export function AssessmentFlow({ userName }: AssessmentFlowProps) {
       if (qIndex < 2) {
         setCurrentQuestion(qIndex + 1)
       } else {
+        if (isGradingRef.current) return
+        isGradingRef.current = true
         setIsGrading(true)
         const gradeResult = await gradeAssessment(resumeText, questions, updatedAnswers)
+        isGradingRef.current = false
         setIsGrading(false)
         setGradingResult(gradeResult)
         setStage("results")
@@ -83,6 +88,7 @@ export function AssessmentFlow({ userName }: AssessmentFlowProps) {
 
   const handleTimeUp = useCallback(
     (answer: string) => {
+      if (isGradingRef.current) return
       const status: QuestionStatus = answer.trim() ? "answered" : "missed"
       advance(answer, status, currentQuestion, answers)
     },
@@ -99,6 +105,7 @@ export function AssessmentFlow({ userName }: AssessmentFlowProps) {
     setGradingResult(null)
     setUploadError(null)
     setIsGrading(false)
+    isGradingRef.current = false
   }
 
   return (

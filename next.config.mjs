@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverComponentsExternalPackages: ["mammoth"],
+    serverComponentsExternalPackages: ["pdf-parse", "mammoth"],
   },
   webpack: (config) => {
     config.resolve.alias.canvas = false

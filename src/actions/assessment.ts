@@ -88,8 +88,9 @@ Return ONLY valid JSON, no preamble, no markdown fences:
 { "overall_score": 75, "persona": "AI-Augmented Professional", "feedback": "..." }
 `.trim()
 
-function buildGradingUserMessage(questions: Question[], answers: string[]): string {
-  return questions.map((q, i) => `
+function buildGradingUserMessage(resumeText: string, questions: Question[], answers: string[]): string {
+  const resumeSection = `CANDIDATE RESUME (for context only):\n${resumeText.slice(0, 1500)}\n\n===\n\n`
+  const questionSections = questions.map((q, i) => `
 SCENARIO ${i + 1}:
 ${q.scenario}
 
@@ -99,6 +100,7 @@ ${q.evaluation_criteria}
 CANDIDATE ANSWER ${i + 1}:
 ${answers[i]?.trim() || "(no answer provided)"}
 `).join("\n---\n")
+  return resumeSection + questionSections
 }
 
 export async function parseAndGenerateQuestions(formData: FormData): Promise<{
@@ -177,7 +179,7 @@ export async function gradeAssessment(
       model: "gpt-4o-mini",
       messages: [
         { role: "system", content: GRADING_SYSTEM },
-        { role: "user", content: buildGradingUserMessage(questions, answers) },
+        { role: "user", content: buildGradingUserMessage(resumeText, questions, answers) },
       ],
       response_format: { type: "json_object" },
       max_tokens: 500,

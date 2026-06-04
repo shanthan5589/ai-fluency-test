@@ -28,6 +28,11 @@ const schema = z
 
 type FormValues = z.infer<typeof schema>
 
+const inputClass =
+  "h-12 bg-white border-neutral-200 text-neutral-900 placeholder:text-neutral-400 focus-visible:ring-emerald-100 focus-visible:ring-offset-0 focus-visible:border-emerald-400"
+
+const labelClass = "text-neutral-500 text-xs uppercase tracking-widest font-bold"
+
 export function ResetPasswordForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -45,17 +50,17 @@ export function ResetPasswordForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
         <FormField
           control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>New password</FormLabel>
+              <FormLabel className={labelClass}>New password</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="••••••••" {...field} />
+                <Input type="password" placeholder="••••••••" className={inputClass} {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 text-xs" />
             </FormItem>
           )}
         />
@@ -65,18 +70,24 @@ export function ResetPasswordForm() {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Confirm new password</FormLabel>
+              <FormLabel className={labelClass}>Confirm new password</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="••••••••" {...field} />
+                <Input type="password" placeholder="••••••••" className={inputClass} {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 text-xs" />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Updating password…" : "Update password"}
-        </Button>
+        <div className="pt-2">
+          <Button
+            type="submit"
+            className="w-full h-12 font-medium text-white bg-neutral-900 rounded-full shadow-lg shadow-neutral-200 hover:bg-black transition-all active:scale-[0.98]"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Updating password…" : "Update password"}
+          </Button>
+        </div>
       </form>
     </Form>
   )

@@ -46,31 +46,39 @@ export function VerifyOtpForm({ email }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
         <FormField
           control={form.control}
           name="token"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Verification code</FormLabel>
+              <FormLabel className="text-neutral-500 text-xs uppercase tracking-widest font-bold">
+                Verification code
+              </FormLabel>
               <FormControl>
                 <Input
                   type="text"
                   inputMode="numeric"
                   maxLength={6}
                   placeholder="123456"
-                  className="text-center text-2xl tracking-widest font-mono"
+                  className="h-12 bg-white border-neutral-200 text-neutral-900 text-center text-2xl tracking-widest font-mono focus-visible:ring-emerald-100 focus-visible:ring-offset-0 focus-visible:border-emerald-400"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 text-xs" />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Verifying…" : "Verify code"}
-        </Button>
+        <div className="pt-2">
+          <Button
+            type="submit"
+            className="w-full h-12 font-medium text-white bg-neutral-900 rounded-full shadow-lg shadow-neutral-200 hover:bg-black transition-all active:scale-[0.98]"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Verifying…" : "Verify code"}
+          </Button>
+        </div>
       </form>
     </Form>
   )

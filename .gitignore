@@ -47,9 +47,11 @@ secrets.*.json
 service-account*.json
 
 # -------------------------
-# Claude Code - local memory (auto-generated, may contain project context)
+# Claude Code - local only, not for public repos
 # -------------------------
-.claude/memory/
+.claude/
+CLAUDE.md
+README.md
 
 # -------------------------
 # OS / editor junk

@@ -7,25 +7,29 @@ import { cn } from "@/lib/utils"
 const TICKERS = [
   "Reading your document...",
   "Extracting key information...",
-  "Preparing your assessment...",
+  "Generating your scenarios...",
 ]
 
-const DELAYS = [0, 1200, 2500]
+// appeared[i] = item is visible; completed[i] = item shows check (Done)
+// The 3rd item appears but never auto-completes — it spins until the API responds
+const APPEAR_DELAYS  = [0, 900, 1800]
+const COMPLETE_DELAYS = [400, 1300]   // only first two complete automatically
 
 export function AnalysisStep() {
-  const [visible, setVisible] = useState<boolean[]>([false, false, false])
+  const [appeared,  setAppeared]  = useState<boolean[]>([false, false, false])
+  const [completed, setCompleted] = useState<boolean[]>([false, false, false])
 
   useEffect(() => {
-    const timers = DELAYS.map((delay, i) =>
-      setTimeout(() => {
-        setVisible((prev) => {
-          const next = [...prev]
-          next[i] = true
-          return next
-        })
-      }, delay)
+    const appearTimers = APPEAR_DELAYS.map((delay, i) =>
+      setTimeout(() => setAppeared(prev => { const n = [...prev]; n[i] = true; return n }), delay)
     )
-    return () => timers.forEach(clearTimeout)
+    const completeTimers = COMPLETE_DELAYS.map((delay, i) =>
+      setTimeout(() => setCompleted(prev => { const n = [...prev]; n[i] = true; return n }), delay)
+    )
+    return () => {
+      appearTimers.forEach(clearTimeout)
+      completeTimers.forEach(clearTimeout)
+    }
   }, [])
 
   return (
@@ -50,29 +54,31 @@ export function AnalysisStep() {
               key={text}
               className={cn(
                 "flex items-center gap-4 rounded-lg border px-5 py-4 transition-all duration-700",
-                visible[i]
-                  ? "translate-y-0 border-emerald-100 bg-emerald-50/60 opacity-100"
-                  : "translate-y-4 border-transparent bg-transparent opacity-0"
+                !appeared[i]
+                  ? "translate-y-4 border-transparent bg-transparent opacity-0"
+                  : completed[i]
+                    ? "translate-y-0 border-emerald-100 bg-emerald-50/60 opacity-100"
+                    : "translate-y-0 border-neutral-200 bg-neutral-50/60 opacity-100"
               )}
             >
               <span className={cn(
                 "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-colors duration-500",
-                visible[i]
+                completed[i]
                   ? "bg-emerald-500 border-emerald-500 text-white"
                   : "bg-neutral-50 border-neutral-200 text-neutral-400"
               )}>
-                {visible[i]
+                {completed[i]
                   ? <Check size={16} />
                   : <Loader2 size={16} className="animate-spin" />
                 }
               </span>
               <span className={cn(
                 "text-sm font-medium tracking-tight transition-colors duration-500",
-                visible[i] ? "text-emerald-800" : "text-neutral-500"
+                completed[i] ? "text-emerald-800" : "text-neutral-500"
               )}>
                 {text}
               </span>
-              {visible[i] && (
+              {completed[i] && (
                 <span className="ml-auto text-xs font-semibold text-emerald-500 uppercase tracking-widest">Done</span>
               )}
             </div>

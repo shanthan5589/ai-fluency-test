@@ -86,9 +86,15 @@ export function QuizArena({
           ))}
         </div>
         <div className="flex-1 flex justify-end">
-          <span className={cn("font-mono text-2xl font-bold tabular-nums transition-colors duration-300", timerColor())}>
-            {formatTime(timeLeft)}
-          </span>
+          {isGrading ? (
+            <span className="font-mono text-2xl font-bold tabular-nums text-neutral-300">
+              --:--
+            </span>
+          ) : (
+            <span className={cn("font-mono text-2xl font-bold tabular-nums transition-colors duration-300", timerColor())}>
+              {formatTime(timeLeft)}
+            </span>
+          )}
         </div>
       </div>
 

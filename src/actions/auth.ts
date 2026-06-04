@@ -39,7 +39,13 @@ export async function signUp(formData: {
     }
   }
 
-  redirect("/dashboard")
+  // If Supabase requires email confirmation, data.session will be null.
+  // Send unconfirmed users to verify-email; confirmed users straight to dashboard.
+  if (data.session) {
+    redirect("/dashboard")
+  } else {
+    redirect("/verify-email")
+  }
 }
 
 export async function login(formData: { email: string; password: string }) {
