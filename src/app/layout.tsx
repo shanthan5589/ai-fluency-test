@@ -16,8 +16,8 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "AI Survival Index",
-  description: "Will your job survive the AI wave?",
+  title: "AI Fluency Test | Advantage Mapping",
+  description: "Measure your career's AI readiness and evolve your competitive advantage.",
 }
 
 export default function RootLayout({
@@ -26,9 +26,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-[family-name:var(--font-geist-sans)] antialiased min-h-screen bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} font-[family-name:var(--font-geist-sans)] antialiased min-h-screen bg-white text-neutral-900`}
       >
         {children}
         <Toaster richColors position="top-center" />

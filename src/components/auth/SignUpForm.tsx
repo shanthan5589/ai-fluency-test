@@ -35,6 +35,11 @@ const schema = z
 
 type FormValues = z.infer<typeof schema>
 
+const inputClass =
+  "h-12 bg-white border-neutral-200 text-neutral-900 placeholder:text-neutral-400 focus-visible:ring-emerald-100 focus-visible:ring-offset-0 focus-visible:border-emerald-400"
+
+const labelClass = "text-neutral-500 text-xs uppercase tracking-widest font-bold"
+
 export function SignUpForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -72,11 +77,11 @@ export function SignUpForm() {
             name="firstName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>First name</FormLabel>
+                <FormLabel className={labelClass}>First name</FormLabel>
                 <FormControl>
-                  <Input placeholder="John" {...field} />
+                  <Input placeholder="John" className={inputClass} {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500 text-xs" />
               </FormItem>
             )}
           />
@@ -85,11 +90,11 @@ export function SignUpForm() {
             name="lastName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Last name</FormLabel>
+                <FormLabel className={labelClass}>Last name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Doe" {...field} />
+                  <Input placeholder="Doe" className={inputClass} {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500 text-xs" />
               </FormItem>
             )}
           />
@@ -100,11 +105,16 @@ export function SignUpForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel className={labelClass}>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="john@example.com" {...field} />
+                <Input
+                  type="email"
+                  placeholder="name@example.com"
+                  className={inputClass}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 text-xs" />
             </FormItem>
           )}
         />
@@ -114,11 +124,16 @@ export function SignUpForm() {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone number</FormLabel>
+              <FormLabel className={labelClass}>Phone number</FormLabel>
               <FormControl>
-                <Input type="tel" placeholder="+1 555 000 0000" {...field} />
+                <Input
+                  type="tel"
+                  placeholder="+1 555 000 0000"
+                  className={inputClass}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 text-xs" />
             </FormItem>
           )}
         />
@@ -128,11 +143,16 @@ export function SignUpForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel className={labelClass}>Password</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="••••••••" {...field} />
+                <Input
+                  type="password"
+                  placeholder="••••••••"
+                  className={inputClass}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 text-xs" />
             </FormItem>
           )}
         />
@@ -142,18 +162,29 @@ export function SignUpForm() {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Confirm password</FormLabel>
+              <FormLabel className={labelClass}>Confirm</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="••••••••" {...field} />
+                <Input
+                  type="password"
+                  placeholder="••••••••"
+                  className={inputClass}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 text-xs" />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Creating account…" : "Create account"}
-        </Button>
+        <div className="pt-2">
+          <Button
+            type="submit"
+            className="w-full h-12 font-medium text-white bg-neutral-900 rounded-full shadow-lg shadow-neutral-200 hover:bg-black transition-all active:scale-[0.98]"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Creating account…" : "Create account"}
+          </Button>
+        </div>
       </form>
     </Form>
   )

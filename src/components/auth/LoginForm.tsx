@@ -24,6 +24,9 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>
 
+const inputClass =
+  "h-12 bg-white border-neutral-200 text-neutral-900 placeholder:text-neutral-400 focus-visible:ring-emerald-100 focus-visible:ring-offset-0 focus-visible:border-emerald-400"
+
 export function LoginForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -41,17 +44,22 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel className="text-neutral-500 text-xs uppercase tracking-widest font-bold">Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="john@example.com" {...field} />
+                <Input
+                  type="email"
+                  placeholder="name@example.com"
+                  className={inputClass}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 text-xs" />
             </FormItem>
           )}
         />
@@ -62,25 +70,36 @@ export function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center justify-between">
-                <FormLabel>Password</FormLabel>
+                <FormLabel className="text-neutral-500 text-xs uppercase tracking-widest font-bold">Password</FormLabel>
                 <Link
                   href="/forgot-password"
-                  className="text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground"
+                  className="text-xs text-neutral-400 hover:text-neutral-900 transition-colors"
                 >
-                  Forgot password?
+                  Forgot?
                 </Link>
               </div>
               <FormControl>
-                <Input type="password" placeholder="••••••••" {...field} />
+                <Input
+                  type="password"
+                  placeholder="••••••••"
+                  className={inputClass}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 text-xs" />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Signing in…" : "Sign in"}
-        </Button>
+        <div className="pt-2">
+          <Button
+            type="submit"
+            className="w-full h-12 font-medium text-white bg-neutral-900 rounded-full shadow-lg shadow-neutral-200 hover:bg-black transition-all active:scale-[0.98]"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Signing in…" : "Sign in"}
+          </Button>
+        </div>
       </form>
     </Form>
   )
