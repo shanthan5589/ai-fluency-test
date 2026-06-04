@@ -2,12 +2,6 @@
 
 import OpenAI from "openai"
 
-// pdfjs-dist (used by pdf-parse) references DOMMatrix which doesn't exist in Node.js
-if (typeof globalThis.DOMMatrix === "undefined") {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ;(globalThis as any).DOMMatrix = class DOMMatrix {}
-}
-
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 export interface Question {
@@ -130,9 +124,8 @@ export async function parseAndGenerateQuestions(formData: FormData): Promise<{
 
   try {
     if (isPdf) {
-      const { PDFParse } = await import("pdf-parse")
-      const parser = new PDFParse({ data: buffer })
-      const data = await parser.getText()
+      const pdfParse = (await import("pdf-parse")).default
+      const data = await pdfParse(buffer)
       resumeText = data.text
     } else {
       const mammoth = await import("mammoth")
