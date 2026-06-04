@@ -51,7 +51,6 @@ service-account*.json
 # -------------------------
 .claude/
 CLAUDE.md
-README.md
 
 # -------------------------
 # OS / editor junk
