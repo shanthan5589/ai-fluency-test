@@ -2,6 +2,12 @@
 
 import OpenAI from "openai"
 
+// pdfjs-dist (used by pdf-parse) references DOMMatrix which doesn't exist in Node.js
+if (typeof globalThis.DOMMatrix === "undefined") {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ;(globalThis as any).DOMMatrix = class DOMMatrix {}
+}
+
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 export interface Question {
