@@ -2,7 +2,6 @@
 
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
-import { createAdminClient } from "@/lib/supabase/admin"
 
 export async function signUp(formData: {
   firstName: string
@@ -18,25 +17,16 @@ export async function signUp(formData: {
     password: formData.password,
     options: {
       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
+      data: {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        phone_number: formData.phone,
+      },
     },
   })
 
   if (error) {
     return { error: error.message }
-  }
-
-  if (data.user) {
-    const adminClient = createAdminClient()
-    const { error: profileError } = await adminClient.from("profiles").insert({
-      id: data.user.id,
-      first_name: formData.firstName,
-      last_name: formData.lastName,
-      phone_number: formData.phone,
-    })
-
-    if (profileError) {
-      return { error: profileError.message }
-    }
   }
 
   // If Supabase requires email confirmation, data.session will be null.
