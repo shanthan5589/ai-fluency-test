@@ -79,7 +79,7 @@ export function LandingPage() {
               className="mt-10 max-w-sm space-y-5"
             >
               <p className="text-[15px] text-neutral-500 leading-[2] tracking-wide">
-                AI isn't replacing people. It's replacing people who don't know how to use it. The gap between those who can direct AI and those who can't is widening faster than any skill gap in history.
+                {"AI isn't replacing people. It's replacing people who don't know how to use it. The gap between those who can direct AI and those who can't is widening faster than any skill gap in history."}
               </p>
               <div className="space-y-3 pt-4">
                 <p className="text-xs text-neutral-400 tracking-wide leading-relaxed">

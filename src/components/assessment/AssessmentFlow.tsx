@@ -109,7 +109,10 @@ export function AssessmentFlow({ userName }: AssessmentFlowProps) {
           <span className="brand-mark shrink-0 bg-neutral-900 border-none">
             <ShieldCheck size={16} strokeWidth={2.2} className="text-white" />
           </span>
-          <span className="text-sm font-bold tracking-tight text-neutral-900 truncate">AI Fluency Test</span>
+          <div className="min-w-0">
+            <span className="block text-sm font-bold tracking-tight text-neutral-900 truncate">AI Fluency Test</span>
+            {userName && <span className="block text-[10px] text-neutral-400 uppercase tracking-widest truncate">{userName}</span>}
+          </div>
         </div>
 
         <div className="flex-1" />
