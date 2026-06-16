@@ -88,7 +88,7 @@ export function QuizArena({
     <div className="flex-1 flex flex-col min-h-0 bg-neutral-100">
 
       {/* Toolbar: question nav boxes centered, current question timer on the right */}
-      <div className="shrink-0 bg-white border-b border-neutral-200 px-6 h-14 flex items-center">
+      <div className="shrink-0 bg-white border-b border-neutral-200 px-3 md:px-6 h-14 flex items-center">
         <div className="flex-1" />
         <div className="flex items-center gap-2">
           {statuses.map((status, i) => {
@@ -116,9 +116,9 @@ export function QuizArena({
         </div>
         <div className="flex-1 flex justify-end">
           {isGrading ? (
-            <span className="font-mono text-2xl font-bold tabular-nums text-neutral-300">--:--</span>
+            <span className="font-mono text-lg md:text-2xl font-bold tabular-nums text-neutral-300">--:--</span>
           ) : (
-            <span className={cn("font-mono text-2xl font-bold tabular-nums transition-colors duration-300", timerColor(timeLeft))}>
+            <span className={cn("font-mono text-lg md:text-2xl font-bold tabular-nums transition-colors duration-300", timerColor(timeLeft))}>
               {formatTime(timeLeft)}
             </span>
           )}
@@ -130,11 +130,11 @@ export function QuizArena({
 
         {/* Left: scenario */}
         <div className="flex-1 flex flex-col border-b md:border-b-0 md:border-r border-neutral-200">
-          <div className="shrink-0 px-6 py-3 border-b border-neutral-100 bg-neutral-50 flex items-center justify-between">
+          <div className="shrink-0 px-4 md:px-6 py-3 border-b border-neutral-100 bg-neutral-50 flex items-center justify-between">
             <span className="text-[11px] font-bold uppercase tracking-widest text-neutral-500">Scenario</span>
-            <span className="text-sm text-neutral-400">Use AI tools — ChatGPT, Claude, or Gemini</span>
+            <span className="text-xs md:text-sm text-neutral-400">Use AI tools — ChatGPT, Claude, or Gemini</span>
           </div>
-          <div className="flex-1 overflow-y-auto p-6">
+          <div className="flex-1 overflow-y-auto p-4 md:p-6">
             <p className="text-[15px] leading-7 text-neutral-700 whitespace-pre-wrap [&_a]:text-inherit [&_a]:no-underline [&_a]:pointer-events-none">
               {question.scenario}
             </p>
@@ -143,7 +143,7 @@ export function QuizArena({
 
         {/* Right: answer */}
         <div className="flex-1 flex flex-col">
-          <div className="shrink-0 px-6 py-3 border-b border-neutral-100 bg-neutral-50 flex items-center justify-between">
+          <div className="shrink-0 px-4 md:px-6 py-3 border-b border-neutral-100 bg-neutral-50 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-[11px] font-bold uppercase tracking-widest text-emerald-700">Your Response</span>
               {isLocked && (
@@ -157,7 +157,7 @@ export function QuizArena({
           </div>
           <div
             className={cn(
-              "flex-1 p-6 transition-colors duration-150",
+              "flex-1 p-4 md:p-6 transition-colors duration-150",
               !isLocked && "cursor-text focus-within:bg-neutral-50/50",
               isLocked && "bg-neutral-50/30 cursor-default"
             )}
@@ -179,7 +179,7 @@ export function QuizArena({
       </div>
 
       {/* Bottom bar */}
-      <div className="shrink-0 bg-white border-t border-neutral-200 px-6 py-3 flex items-center justify-end gap-3">
+      <div className="shrink-0 bg-white border-t border-neutral-200 px-4 md:px-6 py-3 flex items-center justify-end gap-3">
         <Button
           onClick={handleNextClick}
           disabled={isGrading}

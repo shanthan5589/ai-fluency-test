@@ -13,9 +13,9 @@ export default function SignUpPage() {
         </Link>
       </nav>
 
-      <div className="flex-1 flex items-center justify-center p-6">
+      <div className="flex-1 flex items-start md:items-center justify-center p-4 md:p-6">
         <div className="w-full max-w-[400px]">
-          <div className="bg-white rounded-2xl border border-neutral-200 shadow-sm p-8">
+          <div className="bg-white rounded-2xl border border-neutral-200 shadow-sm p-6 md:p-8">
             <div className="mb-7">
               <h1 className="text-2xl font-bold tracking-tight text-neutral-900 mb-1">Create account</h1>
             </div>

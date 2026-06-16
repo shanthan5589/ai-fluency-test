@@ -55,8 +55,8 @@ export function UploadStep({ onUpload }: UploadStepProps) {
   }
 
   return (
-    <div className="flex flex-1 items-center justify-center px-8 pt-0 pb-24">
-      <div className="grid w-full max-w-5xl items-center gap-12 lg:grid-cols-2">
+    <div className="flex flex-1 items-center justify-center px-4 md:px-8 pt-0 pb-12 md:pb-24">
+      <div className="grid w-full max-w-5xl items-center gap-8 md:gap-12 lg:grid-cols-2">
 
         {/* Left: info */}
         <section className="flex flex-col gap-5">
@@ -89,7 +89,7 @@ export function UploadStep({ onUpload }: UploadStepProps) {
           {selectedFile ? (
             <div className="flex flex-col gap-0">
               {/* File preview */}
-              <div className="flex items-center gap-4 px-8 py-6">
+              <div className="flex items-center gap-4 px-5 md:px-8 py-5 md:py-6">
                 <span className="shrink-0 flex h-14 w-14 items-center justify-center rounded-lg border border-neutral-200 bg-neutral-50 text-neutral-600">
                   <FileText className="h-6 w-6" />
                 </span>
@@ -106,7 +106,7 @@ export function UploadStep({ onUpload }: UploadStepProps) {
               </div>
 
               {/* Divider + actions */}
-              <div className="border-t border-neutral-100 px-8 py-4 flex items-center justify-between gap-3">
+              <div className="border-t border-neutral-100 px-5 md:px-8 py-4 flex items-center justify-between gap-3">
                 <button
                   onClick={() => inputRef.current?.click()}
                   className="text-xs font-medium text-neutral-400 hover:text-neutral-700 transition-colors"
@@ -129,24 +129,27 @@ export function UploadStep({ onUpload }: UploadStepProps) {
               onDragLeave={() => setDragging(false)}
               onDrop={handleDrop}
               className={cn(
-                "group flex w-full cursor-pointer items-center gap-6 px-8 py-10 text-left transition-all duration-200",
+                "group flex w-full cursor-pointer items-center gap-3 md:gap-6 px-5 md:px-8 py-7 md:py-10 text-left transition-all duration-200",
                 dragging ? "bg-neutral-100" : "bg-white hover:bg-neutral-50"
               )}
             >
               <span className={cn(
-                "shrink-0 flex h-14 w-14 items-center justify-center rounded-lg border transition-all duration-200",
+                "shrink-0 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-lg border transition-all duration-200",
                 dragging
                   ? "border-neutral-400 bg-neutral-200 text-neutral-700"
                   : "border-neutral-200 bg-neutral-50 text-neutral-600 group-hover:border-neutral-900 group-hover:bg-neutral-900 group-hover:text-white"
               )}>
-                <Upload className="h-6 w-6" />
+                <Upload className="h-5 w-5 md:h-6 md:w-6" />
               </span>
-              <div>
-                <p className="text-base font-semibold text-neutral-900">Drop your resume here</p>
-                <p className="text-sm text-neutral-400 mt-0.5">PDF or DOCX · Max 5 MB</p>
+              <div className="min-w-0">
+                <p className="text-sm md:text-base font-semibold text-neutral-900">
+                  <span className="md:hidden">Tap to upload resume</span>
+                  <span className="hidden md:inline">Drop your resume here</span>
+                </p>
+                <p className="text-xs md:text-sm text-neutral-400 mt-0.5">PDF or DOCX · Max 5 MB</p>
               </div>
               <span className={cn(
-                "ml-auto shrink-0 rounded-lg border px-4 py-2 text-sm font-medium transition-all duration-200",
+                "ml-auto shrink-0 hidden sm:block rounded-lg border px-4 py-2 text-sm font-medium transition-all duration-200",
                 dragging
                   ? "border-neutral-300 bg-white text-neutral-600"
                   : "border-neutral-200 bg-white text-neutral-600 group-hover:border-neutral-900 group-hover:bg-neutral-900 group-hover:text-white"

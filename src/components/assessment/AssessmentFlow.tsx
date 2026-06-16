@@ -195,32 +195,25 @@ export function AssessmentFlow({ userName }: AssessmentFlowProps) {
 
   return (
     <div className="app-page flex min-h-screen flex-col font-sans">
-      <header className="relative z-10 shrink-0 border-b border-neutral-200 bg-white px-8 py-0 h-14 flex items-center">
-        <div className="flex items-center gap-3 w-48">
-          <span className="brand-mark shrink-0 bg-neutral-900 border-none">
-            <ShieldCheck size={16} strokeWidth={2.2} className="text-white" />
-          </span>
-          <div className="min-w-0">
-            <span className="block text-sm font-bold tracking-tight text-neutral-900 truncate">AI Fluency Test</span>
-            {userName && <span className="block text-[10px] text-neutral-400 uppercase tracking-widest truncate">{userName}</span>}
-          </div>
+      <header className="relative z-10 shrink-0 border-b border-neutral-200 bg-white px-4 md:px-8 py-0 h-14 flex items-center gap-3">
+        <span className="brand-mark shrink-0 bg-neutral-900 border-none">
+          <ShieldCheck size={16} strokeWidth={2.2} className="text-white" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <span className="block text-sm font-bold tracking-tight text-neutral-900 truncate">AI Fluency Test</span>
+          {userName && <span className="block text-[10px] text-neutral-400 uppercase tracking-widest truncate">{userName}</span>}
         </div>
-
-        <div className="flex-1" />
-
-        <div className="flex justify-end w-48">
-          <form action={logout}>
-            <Button
-              variant="outline"
-              size="sm"
-              type="submit"
-              className="rounded-lg px-4 h-8 border-neutral-200 text-neutral-600 text-xs hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-colors"
-            >
-              <LogOut size={13} className="mr-1.5" />
-              Log out
-            </Button>
-          </form>
-        </div>
+        <form action={logout}>
+          <Button
+            variant="outline"
+            size="sm"
+            type="submit"
+            className="rounded-lg px-3 md:px-4 h-8 border-neutral-200 text-neutral-600 text-xs hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-colors"
+          >
+            <LogOut size={13} className="mr-1 md:mr-1.5" />
+            Log out
+          </Button>
+        </form>
       </header>
 
       {uploadError && stage === "upload" && (

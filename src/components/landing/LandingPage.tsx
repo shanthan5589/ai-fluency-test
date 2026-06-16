@@ -41,8 +41,8 @@ export function LandingPage() {
       </div>
 
       {/* Top Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-start justify-between p-8 md:p-12">
-        {/* Top Left: Logo + Typewriter below */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4 md:items-start md:px-12 md:py-12">
+        {/* Left: Logo + hero below (hero hidden on mobile, shown in body instead) */}
         <div className="flex flex-col relative z-10">
           <motion.div
             initial={{ opacity: 0, y: -6 }}
@@ -55,11 +55,12 @@ export function LandingPage() {
             </span>
             <div className="flex flex-col">
               <span className="text-sm font-bold tracking-tight text-neutral-900 leading-tight">AI Fluency Test</span>
-              <span className="text-[9px] uppercase tracking-[0.3em] text-neutral-400 font-medium leading-tight">Evolving for the next workforce</span>
+              <span className="hidden md:block text-[9px] uppercase tracking-[0.3em] text-neutral-400 font-medium leading-tight">Evolving for the next workforce</span>
             </div>
           </motion.div>
 
-          <div className="max-w-2xl pt-24 md:pt-28">
+          {/* Hero content — desktop only inside nav */}
+          <div className="hidden md:block max-w-2xl pt-28">
             <motion.div
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
@@ -96,54 +97,85 @@ export function LandingPage() {
           </div>
         </div>
 
-        {/* Top Right: Auth Actions */}
-        <div className="flex items-center gap-10 text-sm font-medium tracking-tight relative z-10">
-          <Link 
-            href="/login" 
-            className="text-neutral-400 hover:text-neutral-900 transition-all duration-500 ease-out relative group"
+        {/* Right: Auth Actions */}
+        <div className="flex items-center gap-5 md:gap-10 text-sm font-medium tracking-tight relative z-10">
+          <Link
+            href="/login"
+            className="text-neutral-500 hover:text-neutral-900 transition-colors text-xs md:text-sm"
           >
-            Sign In
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full" />
+            Sign in
           </Link>
-          <Link 
-            href="/signup" 
-            className="px-8 py-3 bg-neutral-900 text-white rounded-full hover:bg-black transition-all duration-500 ease-out shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 active:translate-y-0"
+          <Link
+            href="/signup"
+            className="px-4 py-2 md:px-8 md:py-3 bg-neutral-900 text-white rounded-full hover:bg-black transition-all duration-300 text-xs md:text-sm font-medium shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0"
           >
             Get Started
           </Link>
         </div>
       </nav>
 
+      {/* Mobile hero — only shown on small screens */}
+      <div className="md:hidden relative z-10 flex flex-col justify-center min-h-screen px-5 pt-20 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <h1 className="text-[2.6rem] leading-[1.1] tracking-tight font-serif italic text-neutral-900">
+            The future belongs to the AI-fluent.
+            <BlinkingCursor />
+          </h1>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-6 space-y-6"
+        >
+          <p className="text-sm text-neutral-500 leading-relaxed">
+            {"AI isn't replacing people. It's replacing people who don't know how to use it."}
+          </p>
+          <Link
+            href="/signup"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white text-sm font-medium rounded-full hover:bg-black transition-all"
+          >
+            Take the Assessment →
+          </Link>
+        </motion.div>
+      </div>
+
       {/* Main Content: Minimalist Canvas */}
       <main className="relative z-10">
-        <section className="flex min-h-screen items-center justify-end p-8 md:p-32 relative">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-            animate={{ opacity: 0.4, scale: 1, rotate: 0 }}
-            transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] pointer-events-none -mt-20"
-          >
-            <svg
-              viewBox="0 0 200 200"
-              className="w-full h-full text-neutral-900"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="0.5"
-            >
-              <circle cx="100" cy="100" r="90" />
-              <ellipse cx="100" cy="100" rx="90" ry="30" />
-              <ellipse cx="100" cy="100" rx="90" ry="60" />
-              <ellipse cx="100" cy="100" rx="30" ry="90" />
-              <ellipse cx="100" cy="100" rx="60" ry="90" />
-              <line x1="100" y1="10" x2="100" y2="190" />
-              <line x1="10" y1="100" x2="190" y2="100" />
-            </svg>
+        <section className="hidden md:flex min-h-screen items-center justify-end p-8 md:p-32 relative">
+          <div className="hidden md:block">
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0 border border-neutral-200 rounded-full scale-[1.1] border-dashed opacity-50"
-            />
-          </motion.div>
+              initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+              animate={{ opacity: 0.4, scale: 1, rotate: 0 }}
+              transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] pointer-events-none -mt-20"
+            >
+              <svg
+                viewBox="0 0 200 200"
+                className="w-full h-full text-neutral-900"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+              >
+                <circle cx="100" cy="100" r="90" />
+                <ellipse cx="100" cy="100" rx="90" ry="30" />
+                <ellipse cx="100" cy="100" rx="90" ry="60" />
+                <ellipse cx="100" cy="100" rx="30" ry="90" />
+                <ellipse cx="100" cy="100" rx="60" ry="90" />
+                <line x1="100" y1="10" x2="100" y2="190" />
+                <line x1="10" y1="100" x2="190" y2="100" />
+              </svg>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 border border-neutral-200 rounded-full scale-[1.1] border-dashed opacity-50"
+              />
+            </motion.div>
+          </div>
         </section>
       </main>
 
