@@ -151,7 +151,7 @@ export async function parseAndGenerateQuestions(formData: FormData): Promise<{
         { role: "user", content: `CANDIDATE RESUME:\n${resumeText}` },
       ],
       response_format: { type: "json_object" },
-      max_tokens: 1200,
+      max_tokens: 2500,
     })
 
     const raw = completion.choices[0].message.content ?? "{}"
