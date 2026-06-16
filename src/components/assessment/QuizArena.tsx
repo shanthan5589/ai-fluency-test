@@ -94,7 +94,6 @@ export function QuizArena({
           {statuses.map((status, i) => {
             const isCurrent = i === currentQuestion
             const isVisited = timerActive[i]
-            const isTimedOut = locked[i]
 
             return (
               <button
