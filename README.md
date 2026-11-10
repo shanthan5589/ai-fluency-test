@@ -61,7 +61,7 @@ The grading process prioritizes critical thinking and domain judgment over polis
 ### Installation
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/shanthan5589/ai-fluency-test.git
 cd ai-fluency-test
 npm install
 ```
@@ -194,8 +194,8 @@ flowchart TD
     end
 
     subgraph openaiLayer [OpenAI gpt-4o-mini]
-        questionGen["Question Generation\nInput: resume text\nOutput: 3 role-specific scenarios\nmax 1200 tokens - JSON mode"]
-        gradingModel["Grading\nInput: 3 scenarios and answers\nOutput: score 0-100 - persona - feedback\nmax 500 tokens - JSON mode"]
+        questionGen["Question Generation\nInput: resume text\nOutput: 3 role-specific scenarios\nmax 2500 tokens - JSON mode"]
+        gradingModel["Grading\nInput: 3 scenarios and answers\nOutput: score 0-100 - persona - feedback\nmax 600 tokens - JSON mode"]
     end
 
     middleware -->|"no session on /dashboard"| authPages
