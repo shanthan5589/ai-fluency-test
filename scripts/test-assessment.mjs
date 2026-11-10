@@ -3,6 +3,10 @@
  * Run: node scripts/test-assessment.mjs
  */
 
+import { createRequire } from "node:module"
+
+const require = createRequire(import.meta.url)
+
 let passed = 0
 let failed = 0
 
@@ -105,12 +109,11 @@ console.log("\n[6] Mammoth import (runtime)")
 const mammoth = await import("mammoth")
 assert(typeof mammoth.extractRawText === "function", "mammoth.extractRawText is a function")
 
-// ─── Test 7: pdf-parse v2 import shape ────────────────────────────────────────
-console.log("\n[7] pdf-parse v2 import (runtime)")
+// ─── Test 7: pdf-parse v1 import shape ────────────────────────────────────────
+console.log("\n[7] pdf-parse v1 import (runtime)")
 
-const { PDFParse } = await import("pdf-parse")
-assert(typeof PDFParse === "function", "PDFParse is a constructor function")
-assert(PDFParse.isNodeJS === true, "PDFParse.isNodeJS is true (Node.js env detected)")
+const pdfParse = require("pdf-parse")
+assert(typeof pdfParse === "function", "pdf-parse CommonJS export is a function")
 
 // ─── Test 8: JSON parsing resilience (mirrors assessment.ts LLM response) ─────
 console.log("\n[8] JSON response parsing resilience")

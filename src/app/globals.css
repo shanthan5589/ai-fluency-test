@@ -42,39 +42,6 @@
 }
 
 @layer components {
-  .site-shell {
-    position: relative;
-    min-height: 100vh;
-    background: #ffffff;
-    color: #0a0a0a;
-  }
-
-  .nav-cta-link,
-  .hero-cta-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    background: #000000;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-  }
-
-  .nav-cta-link:hover,
-  .hero-cta-primary:hover {
-    background: #262626;
-    transform: translateY(-1px);
-  }
-
-  .glass-panel {
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-  }
-
   .auth-page {
     position: relative;
     min-height: 100vh;
@@ -89,15 +56,4 @@
     color: #0a0a0a;
   }
 
-  .field-input {
-    height: 44px;
-    border-color: rgba(0, 0, 0, 0.1);
-    background: transparent;
-    color: #0a0a0a;
-  }
-
-  .field-input:focus-visible {
-    border-color: #000000;
-    --tw-ring-color: rgba(0, 0, 0, 0.1);
-  }
 }
