@@ -29,7 +29,7 @@ The grading process prioritizes critical thinking and domain judgment over polis
 
 ## Key Features
 
-- resume-based question generation
+- Resume-based question generation
 - Role-specific workplace scenarios
 - PDF and DOCX support
 - Timed assessment questions
